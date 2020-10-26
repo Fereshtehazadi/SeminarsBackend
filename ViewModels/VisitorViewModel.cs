@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Seminarie
+namespace Seminarie.ViewModels
 {
-    public class Visitor
+    public class VisitorViewModel
     {
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
         public string company { get; set; }
-        public int seminarId { get; set;}
-        //public Seminar seminar { get; set; }
+
+        public int seminarId { get; set; }
     }
 }

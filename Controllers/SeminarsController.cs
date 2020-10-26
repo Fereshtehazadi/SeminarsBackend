@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Seminarie.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
     [ApiController]
     public class SeminarsController : ControllerBase
     {
@@ -80,8 +82,7 @@ namespace Seminarie.Controllers
                 context.Seminars.Remove(seminar);
                 context.SaveChanges();
 
-
-               
+                
             }
         }
     }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Seminarie.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Seminarie.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
     [ApiController]
     public class VisitorsController : ControllerBase
     {
@@ -36,10 +39,26 @@ namespace Seminarie.Controllers
             return "value";
         }
 
-        // POST api/<VisitorsController>
+        //POST api/<VisitorsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] VisitorViewModel visitorVM)
         {
+            using (var context = new ApplicationDbContext())
+            { 
+                var visitor = new Visitor
+                {
+                   
+                    name = visitorVM.name,
+                   email= visitorVM.email,
+                    phone = visitorVM.phone,
+                    company = visitorVM.company,
+                    seminarId= visitorVM.seminarId
+
+                };
+                context.Visitors.Add(visitor);                                            
+
+                context.SaveChanges();
+            }
         }
 
         // PUT api/<VisitorsController>/5
@@ -54,4 +73,5 @@ namespace Seminarie.Controllers
         {
         }
     }
+    //SeminarId
 }
